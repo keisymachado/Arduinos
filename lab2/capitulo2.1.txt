@@ -1,0 +1,37 @@
+int PULSADOR = 2; 
+int LED=3; 
+int ESTADO=LOW; 
+
+// Función setup: se ejecuta UNA sola vez cuando el Arduino inicia
+
+void setup(){ 
+
+  // Configura el pin del PULSADOR como entrada
+  // INPUT significa que el Arduino va a LEER información desde ese pin
+ 
+  pinMode(PULSADOR, INPUT); 
+
+  // Configura el pin del LED como salida
+  // OUTPUT significa que el Arduino va a ENVIAR corriente desde ese pin
+ 
+  pinMode(LED, OUTPUT); 
+
+  // Apaga el LED al iniciar el programa
+  // LOW = 0V (apagado)
+  // HIGH = 5V (encendido)
+ 
+  digitalWrite(LED, LOW);
+
+}
+void loop (){ 
+
+while(digitalRead(PULSADOR) == LOW){ 	// espera infinitamente hasta que se presione el pulsador
+ }
+
+ESTADO = digitalRead(LED); 		// leo estado del LED para saber si esta encendido o apagado
+digitalWrite(LED, !ESTADO); 		// escribo en la salida el valor apuesto al leido con anterioridad
+
+while(digitalRead(PULSADOR) == HIGH){ 	// espera como funcion antirebote simple
+ }
+
+}

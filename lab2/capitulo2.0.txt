@@ -1,0 +1,17 @@
+// Se ejecuta una sola vez al iniciar
+void setup (){
+  pinMode(2, INPUT);   // Pin 2 como entrada (botón)
+  pinMode(3, OUTPUT);  // Pin 3 como salida (LED)
+}
+
+// Se repite infinitamente
+void loop(){
+
+  // Si el botón está presionado
+  if (digitalRead(2) == HIGH){
+    digitalWrite(3, HIGH);  // Enciende el LED
+  }
+  else{
+    digitalWrite(3, LOW);   // Apaga el LED
+  }
+}
