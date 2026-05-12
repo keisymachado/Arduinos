@@ -2,7 +2,8 @@ int LED = 3;				// LED en pin 3
 int BRILLO;
 
 void setup(){
-	pinMode(LED, OUTPUT);		// pin 3 como salida
+	pinMode(LED, OUTPUT);		// pin 3 como salida 
+	//donde va a funcionar 
 }
 
 void loop(){
