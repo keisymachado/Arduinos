@@ -1,20 +1,29 @@
-int SENSOR = 2;
-int VALOR;
-int ANTERIOR = 1;
+int SENSOR = 2; // Pin donde está conectado el sensor
+int VALOR; // Variable para guardar la lectura del sensor
+int ANTERIOR = 1; // Guarda el estado anterior del sensor
 
 void setup(){
-  Serial.begin(9600);
-  pinMode(SENSOR, INPUT);
+  Serial.begin(9600); // Inicia la comunicación serial
+  pinMode(SENSOR, INPUT); // Configura el pin del sensor como entrada
 }
 
 void loop(){
-  VALOR = digitalRead(SENSOR);
+  VALOR = digitalRead(SENSOR); // Lee el estado del sensor
+  
+  // Verifica si el valor cambió respecto al anterior
   if(VALOR != ANTERIOR){
+    
+    // Si el sensor detecta línea
     if(VALOR == HIGH)
     Serial.println("linea");
+    
+    // Si el sensor no detecta línea
   else
   Serial.println("fuera");
+  
+  // Actualiza el estado anterior
   ANTERIOR = VALOR;
   }
-  delay(500);
+
+  delay(500); // Espera medio segundo
 }

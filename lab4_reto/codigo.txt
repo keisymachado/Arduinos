@@ -1,44 +1,46 @@
-#include <LiquidCrystal.h>
-#include <DHT.h>
+#include <LiquidCrystal.h> // Librería para manejar la pantalla LCD
+#include <DHT.h> // Librería para el sensor DHT11
 
-// LCD
+// Configuración de la pantalla LCD
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-// DHT11
-#define DHTPIN 7
-#define DHTTYPE DHT11
+// Configuración del sensor DHT11
+#define DHTPIN 7 // Pin donde está conectado el DHT11
+#define DHTTYPE DHT11 // Tipo de sensor DHT
 DHT dht(DHTPIN, DHTTYPE);
 
-// LM35
+// Pin del sensor LM35
 int pinLM35 = A0;
 
 void setup() {
-  lcd.begin(16, 2);
-  dht.begin();
-  Serial.begin(9600);
+  lcd.begin(16, 2); // Inicializa LCD de 16 columnas y 2 filas
+  dht.begin(); // Inicializa el sensor DHT11
+  Serial.begin(9600); // Inicia comunicación serial
 }
 
 void loop() {
 
-  // LM35
-  int lectura = analogRead(pinLM35);
-  float voltaje = lectura * (5.0 / 1023.0);
-  float tempLM35 = voltaje * 100.0;
+  // Lectura del sensor LM35
+  int lectura = analogRead(pinLM35); // Lee el valor analógico
+  float voltaje = lectura * (5.0 / 1023.0); // Convierte lectura a voltaje
+  float tempLM35 = voltaje * 100.0; // Convierte voltaje a temperatura
 
-  // DHT11
+  // Lectura de temperatura del DHT11
   float tempDHT = dht.readTemperature();
 
-  lcd.clear();
+  lcd.clear(); // Limpia la pantalla LCD
 
+  // Muestra temperatura del DHT11
   lcd.setCursor(0, 0);
   lcd.print("Temp_DHT11:");
   lcd.print(tempDHT);
   lcd.print("C");
 
+  // Muestra temperatura del LM35
   lcd.setCursor(0, 1);
   lcd.print("Temp_LM35:");
   lcd.print(tempLM35);
   lcd.print("C");
 
-  delay(2000);
+  delay(2000); // Espera 2 segundos
 }

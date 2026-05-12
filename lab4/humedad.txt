@@ -1,23 +1,25 @@
+#include <DHT.h>        // Incluye la librería principal para manejar sensores DHT (DHT11, DHT22, etc.)
+#include <DHT_U.h>      // Incluye librería auxiliar para integración con otros sistemas
 
-#include <DHT.h>		
-#include <DHT_U.h>
+int SENSOR = 2;         // Pin digital 2 de Arduino conectado al sensor DHT22
+int TEMPERATURA;        // Variable para almacenar la lectura de temperatura
+int HUMEDAD;            // Variable para almacenar la lectura de humedad
 
-int SENSOR = 2;			
-int TEMPERATURA;
-int HUMEDAD;
+DHT dht(SENSOR, DHT22); // Se crea un objeto 'dht' indicando el pin y el tipo de sensor (DHT22)
 
-DHT dht(SENSOR, DHT22);		
 void setup(){
-  Serial.begin(9600);		
-  dht.begin();			
+  Serial.begin(9600);   // Inicializa la comunicación serial a 9600 baudios
+  dht.begin();          // Inicializa el sensor DHT22
 }
 
 void loop(){
-  TEMPERATURA = dht.readTemperature();
-  HUMEDAD = dht.readHumidity();		
-  Serial.print("Temperatura: ");	
-  Serial.print(TEMPERATURA);
-  Serial.print(" Humedad: ");
-  Serial.println(HUMEDAD);
-  delay(500);
+  TEMPERATURA = dht.readTemperature(); // Lee la temperatura en grados Celsius
+  HUMEDAD = dht.readHumidity();        // Lee la humedad relativa en porcentaje
+  
+  Serial.print("Temperatura: ");       // Imprime el texto "Temperatura: " en el monitor serial
+  Serial.print(TEMPERATURA);           // Imprime el valor de la temperatura
+  Serial.print(" Humedad: ");          // Imprime el texto "Humedad: "
+  Serial.println(HUMEDAD);             // Imprime el valor de la humedad y salta a la siguiente línea
+  
+  delay(500);                          // Espera 500 ms antes de repetir el ciclo
 }
